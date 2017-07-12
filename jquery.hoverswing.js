@@ -1,8 +1,22 @@
 // style of http://caozhi.news.163.com/
 // auther Peter Zhang
 // July 12 2017
-
-(function($,window){
+(function (factory) {
+    var jQuery;
+    if (typeof define === 'function' && define.amd) {
+        // AMD
+        define(['jQuery'], factory);
+    } else if (typeof module === 'object' && typeof module.exports === "object") {
+        // Node/CommonJS
+        jQuery = require('jQuery');
+        module.exports = factory(jQuery);
+    } else {
+        // Browser globals
+        if (typeof window.jQuery === 'undefined')
+            throw 'jQuery must be loaded first';
+        factory(window.jQuery);
+    }
+}(function($){
   var HoverSwing = function(element, option){
     this.$element = $(element);
     this.option = $.extend({},HoverSwing.DEFAULT,option);
@@ -42,4 +56,4 @@
     $.fn.hoverswing = old;
     return this;
   }
-})(jQuery,window);
+}));
