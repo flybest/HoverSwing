@@ -4,12 +4,12 @@ A jQuery plugin which can add the swing effect when hovering the dom object, esp
 
 inspired by caozhi (http://caozhi.news.163.com/)
 
-##Online Demo
+## Online Demo
 https://flybest.github.io/HoverSwing/
 
-##Usage
+## Usage
 $(seletor).hoverswing({extent:0.00025})
 
-##Params
+## Params
 extent [optional]： define the swing extent, default is 0.00025, greater than 0.00025 is not suggested
 
