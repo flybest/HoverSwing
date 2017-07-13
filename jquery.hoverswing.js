@@ -79,8 +79,17 @@
     this.option.swingAngle = Math.min(_MAXANGLE, this.option.swingAngle);
     this.option.swingAngle = Math.max(_MINANGLE, this.option.swingAngle);
     this.$element.css({display: 'block',overflow: 'hidden',transition: 'transform .2s linear',transform: 'matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'});
-    this.$element.on('mousemove', $.proxy(this.transform, this));
-    this.$element.on('mouseleave', $.proxy(this.restore, this));
+    // this.$element.on('mousemove', $.proxy(this.transform, this));
+    // this.$element.on('mouseleave', $.proxy(this.restore, this));
+    this.$element.on('mouseover', $.proxy(function(){
+      console.log('over')
+      this.$element.on('mousemove', $.proxy(this.transform, this))
+    }, this));
+    this.$element.on('mouseout', $.proxy(function(){
+      this.$element.off('mousemove');
+      console.log('out')
+      this.restore();
+    }, this));
   }
 
   HoverSwing.DEFAULT = {
@@ -88,6 +97,7 @@
   }
 
   HoverSwing.prototype.transform = function(e){
+    console.log('move');
     var angle = this.option.swingAngle;
     var ry = -angle + angle * 2 * e.offsetX / this.$element.width(), rx = angle - angle * 2 * e.offsetY / this.$element.height();
     this.$element.css('transform', transformCSS(rx, ry, 1000));
