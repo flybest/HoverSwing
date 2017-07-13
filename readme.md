@@ -8,8 +8,7 @@ inspired by caozhi (http://caozhi.news.163.com/)
 https://flybest.github.io/HoverSwing/
 
 ## Usage
-$(seletor).hoverswing({extent:0.00025})
+$(seletor).hoverswing({swingAngle:15})
 
 ## Params
-extent [optional]： define the swing extent, default is 0.00025, greater than 0.00025 is not suggested
-
+swingAngle [optional]： define the swing angle, default is 15 degree, value should be during 5 to 30
