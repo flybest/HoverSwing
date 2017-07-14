@@ -73,6 +73,16 @@
     return transform;
   }
 
+  var transform = function(e){
+    var angle = this.option.swingAngle;
+    var ry = -angle + angle * 2 * e.offsetX / this.$element.width(), rx = angle - angle * 2 * e.offsetY / this.$element.height();
+    this.$element.css('transform', transformCSS(rx, ry, 1000));
+  }
+
+  var restore = function(e){
+    this.$element.css('transform','matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)');
+  }
+
   var HoverSwing = function(element, option){
     this.$element = $(element);
     this.option = $.extend({},HoverSwing.DEFAULT, option);
@@ -82,29 +92,16 @@
     // this.$element.on('mousemove', $.proxy(this.transform, this));
     // this.$element.on('mouseleave', $.proxy(this.restore, this));
     this.$element.on('mouseover', $.proxy(function(){
-      console.log('over')
-      this.$element.on('mousemove', $.proxy(this.transform, this))
+      this.$element.on('mousemove', $.proxy(transform, this))
     }, this));
     this.$element.on('mouseout', $.proxy(function(){
       this.$element.off('mousemove');
-      console.log('out')
-      this.restore();
+      $.proxy(restore, this)();
     }, this));
   }
 
   HoverSwing.DEFAULT = {
     swingAngle: 15
-  }
-
-  HoverSwing.prototype.transform = function(e){
-    console.log('move');
-    var angle = this.option.swingAngle;
-    var ry = -angle + angle * 2 * e.offsetX / this.$element.width(), rx = angle - angle * 2 * e.offsetY / this.$element.height();
-    this.$element.css('transform', transformCSS(rx, ry, 1000));
-  }
-
-  HoverSwing.prototype.restore = function(e){
-    this.$element.css('transform','matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)');
   }
 
   function Plugin(option){
