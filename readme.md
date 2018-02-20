@@ -11,4 +11,4 @@ https://flybest.github.io/HoverSwing/
 $(seletor).hoverswing({swingAngle:15})
 
 ## Params
-swingAngle [optional]： define the swing angle, default is 15 degree, value should be during 5 to 30
+swingAngle [optional]： define the swing angle, default is 15 degree, value should be between 5 to 30
